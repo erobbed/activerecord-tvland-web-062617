@@ -1,4 +1,5 @@
 require "bundler/setup"
+require "pry"
 
 require "sinatra/activerecord"
 
@@ -8,3 +9,10 @@ Dir[File.join(File.dirname(__FILE__), "../app/models", "*.rb")].each {|f| requir
 
 connection_details = YAML::load(File.open('config/database.yml'))
 ActiveRecord::Base.establish_connection(connection_details)
+
+task :console do
+  def reload!
+    load_all 'app'
+  end
+  Pry.start
+end
