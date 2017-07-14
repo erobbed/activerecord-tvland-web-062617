@@ -9,6 +9,6 @@ class Actor < ActiveRecord::Base
   def list_roles
     characters = self.characters.pluck(:name)
     shows = self.shows.pluck(:name)
-    characters.zip(shows).join(" - ")
+    roles = characters.zip(shows).map{|role| role.join(" - ")}
   end
 end
